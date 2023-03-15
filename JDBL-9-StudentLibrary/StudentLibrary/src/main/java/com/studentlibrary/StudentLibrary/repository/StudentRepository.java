@@ -32,4 +32,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     public void updateStudentInfo( Student std);
 
 
+    @Modifying
+    @Query("delete from Student s where s.id =:id")
+    void deleteStudent(int id);
 }

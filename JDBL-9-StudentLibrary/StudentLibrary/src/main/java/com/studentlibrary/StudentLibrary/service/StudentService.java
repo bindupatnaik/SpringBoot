@@ -28,6 +28,12 @@ public class StudentService {
 
     }
 
+    public void deleteStudent(int id){
+        cardService.deactivateCard(id);
+        studentRepository.deleteStudent(id);
+//        studentRepository.deleteById(id);
+    }
+
 //    public void deleteStudentById(int student_id) {
 //        //before deleting student id from table deactivate the card
 //        cardService.deactivateCard(student_id);

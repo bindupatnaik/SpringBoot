@@ -22,6 +22,9 @@ public class CardService {
         return card;
     }
 
+    public void deactivateCard(int student_id){
+        cardRepository.deactivateCard(student_id, CardStatus.DEACTIVATED);
+    }
 
 
 //    public void deactivateCard(int student_id) {
