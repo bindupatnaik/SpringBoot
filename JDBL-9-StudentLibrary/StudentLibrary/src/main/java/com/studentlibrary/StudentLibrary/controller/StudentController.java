@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class StudentController {
 
@@ -30,10 +32,19 @@ public class StudentController {
 
 
     @DeleteMapping("/deleteStudent")
-    public ResponseEntity deleteStudent(@RequestParam("id") int id){
+    public ResponseEntity deleteStudent(@RequestParam(value = "id", required = true) int id){
         studentService.deleteStudent(id);
         return new ResponseEntity<>("student is deleted", HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/getStudent")
+    public ResponseEntity getStudent(@RequestParam(value = "name", required = false) String name){
+        List<Student> studentList = studentService.getStudent(name);
+        return new ResponseEntity(studentList, HttpStatus.OK);
+
+    }
+
+
 
 //    @DeleteMapping("/deleteStudent")
 //    public ResponseEntity deleteStudent(@RequestParam("id") int student_id){

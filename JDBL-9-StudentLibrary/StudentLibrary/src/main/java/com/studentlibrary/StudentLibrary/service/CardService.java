@@ -16,8 +16,8 @@ public class CardService {
     public Card createAndGetCard(Student student) {
         Card card = new Card();
 //        card.setStudent(student);
-        student.setCard(card);
         card.setCardStatus(CardStatus.ACTIVATED);
+        student.setCard(card);
         cardRepository.save(card);
         return card;
     }

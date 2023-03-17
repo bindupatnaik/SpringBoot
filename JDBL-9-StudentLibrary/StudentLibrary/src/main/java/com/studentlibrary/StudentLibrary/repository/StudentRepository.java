@@ -35,4 +35,10 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Modifying
     @Query("delete from Student s where s.id =:id")
     void deleteStudent(int id);
+
+    @Query("select s from Student s ")
+    public List<Student> getAllStudents(String name);
+
+    @Query("select s from Student s where s.name=:name")
+    public Student getStudentByName(String name);
 }

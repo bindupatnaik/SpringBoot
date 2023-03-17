@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 public class StudentService {
     private static Logger logger = LoggerFactory.getLogger(StudentService.class);
@@ -32,6 +35,17 @@ public class StudentService {
         cardService.deactivateCard(id);
         studentRepository.deleteStudent(id);
 //        studentRepository.deleteById(id);
+    }
+
+    public List<Student> getStudent(String name) {
+        if (name == null){
+            return studentRepository.getAllStudents(name);
+        }else{
+            Student studentByName = studentRepository.getStudentByName(name);
+            List<Student> list = Arrays.asList(studentByName);
+            return list;
+        }
+
     }
 
 //    public void deleteStudentById(int student_id) {

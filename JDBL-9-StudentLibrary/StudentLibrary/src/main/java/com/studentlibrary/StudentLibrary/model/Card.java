@@ -1,11 +1,14 @@
 package com.studentlibrary.StudentLibrary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 /**
  * create table card (id integer not null auto_increment, created_on date, updated_on date, primary key (id)) engine=InnoDB
@@ -28,8 +31,13 @@ public class Card {
     private int id;
 
 
-    @OneToOne(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Student student;
+//    @OneToOne(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Student student;
+
+
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Book> booksIssued;
 
 //    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
 //    private List<Student> students;
@@ -76,12 +84,19 @@ public class Card {
         this.id = id;
     }
 
-    public Student getStudent() {
-        return student;
+//    public Student getStudent() {
+//        return student;
+//    }
+
+//    public void setStudent(Student student) {
+//        this.student = student;
+//    }
+    public List<Book> getBooksIssued() {
+        return booksIssued;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setBooksIssued(List<Book> booksIssued) {
+        this.booksIssued = booksIssued;
     }
 
 //    public List<Student> getStudents() {
@@ -97,7 +112,7 @@ public class Card {
     public String toString() {
         return "Card{" +
                 "id=" + id +
-                ", student=" + student +
+                //", student=" + student +
                 ", createdOn=" + createdOn +
                 ", updatedOn=" + updatedOn +
                 ", cardStatus=" + cardStatus +
